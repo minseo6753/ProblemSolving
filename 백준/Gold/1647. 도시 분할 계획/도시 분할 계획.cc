@@ -3,18 +3,26 @@
 #include<queue>
 using namespace std;
 
-int* parent;
+class Group {
+	int* parent;
 
-int findRoot(int x) {
-	if (parent[x] == x)return x;
-	else return parent[x] = findRoot(parent[x]);
-}
+public:
+	Group(int size) {
+		parent = new int[size + 1];
+		for (int i = 1; i <= size; i++)parent[i] = i;
+	}
 
-void uni(int x, int y) {
-	int rootX = findRoot(x);
-	int rootY = findRoot(y);
-	parent[rootY] = rootX;
-}
+	int findRoot(int x) {
+		if (parent[x] == x)return x;
+		else return parent[x] = findRoot(parent[x]);
+	}
+
+	void uni(int x, int y) {
+		int rootX = findRoot(x);
+		int rootY = findRoot(y);
+		parent[rootY] = rootX;
+	}
+};
 
 int main() {
 	ios_base::sync_with_stdio(false);
@@ -31,17 +39,16 @@ int main() {
 		pq.push({ -c, {a,b} });
 	}
 
-	parent = new int[n + 1];
-	for (int i = 1; i <= n; i++)parent[i] = i;
+	Group g(n);
 	int count = 0;
 	int sum = 0;
 	while (count < n - 2) {
 		int node1 = pq.top().second.first;
 		int node2 = pq.top().second.second;
-		if (findRoot(node1) != findRoot(node2)) {
+		if (g.findRoot(node1) != g.findRoot(node2)) {
 			sum += -pq.top().first;
 			count++;
-			uni(node1, node2);
+			g.uni(node1, node2);
 		}
 		pq.pop();
 	}
