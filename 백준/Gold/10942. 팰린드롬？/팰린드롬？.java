@@ -5,14 +5,19 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int[][] board = new int[9][9];
+    static BufferedReader br;
+    static StringTokenizer st;
+    static int n;
+    static int m;
+    static boolean[][] palindrome;
+    static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        br = new BufferedReader(new InputStreamReader(System.in));
+        st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
+        n = Integer.parseInt(st.nextToken());
         int[] sequence = new int[n];
 
         st = new StringTokenizer(br.readLine());
@@ -20,7 +25,7 @@ public class Main {
             sequence[i] = Integer.parseInt(st.nextToken());
         }
 
-        boolean[][] palindrome = new boolean[n][n];
+        palindrome = new boolean[n][n];
         for (int i = 0; i < n; i++) {
             palindrome[i][i] = true;
 
@@ -43,9 +48,9 @@ public class Main {
         }
 
         st = new StringTokenizer(br.readLine());
-        int m = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken());
