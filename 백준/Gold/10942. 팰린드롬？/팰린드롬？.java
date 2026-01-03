@@ -10,6 +10,7 @@ public class Main {
     static int n;
     static int m;
     static boolean[][] palindrome;
+    static int[] sequence;
     static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
@@ -18,7 +19,7 @@ public class Main {
         st = new StringTokenizer(br.readLine());
 
         n = Integer.parseInt(st.nextToken());
-        int[] sequence = new int[n];
+        sequence = new int[n];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
