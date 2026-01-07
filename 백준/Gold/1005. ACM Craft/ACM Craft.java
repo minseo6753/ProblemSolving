@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 public class Main {
 
     static int n;
-    static List<List<Integer>> graph;
+    static ArrayList<Integer>[] graph;
     static int[] inDegree;
 
     public static void main(String[] args) throws IOException {
@@ -33,9 +33,9 @@ public class Main {
                 delay[i] = Integer.parseInt(st.nextToken());
             }
 
-            graph = new ArrayList<>();
-            for (int i = 0; i <= n; i++) {
-                graph.add(new ArrayList<>());
+            graph = new ArrayList[n + 1];
+            for (int i = 1; i <= n; i++) {
+                graph[i] = new ArrayList<>();
             }
             inDegree = new int[n + 1];
 
@@ -43,7 +43,7 @@ public class Main {
                 st = new StringTokenizer(br.readLine());
                 int x = Integer.parseInt(st.nextToken());
                 int y = Integer.parseInt(st.nextToken());
-                graph.get(x).add(y);
+                graph[x].add(y);
                 inDegree[y]++;
             }
 
@@ -51,9 +51,9 @@ public class Main {
 
             int[] time = new int[n + 1];
             for (Integer number : topology) {
-                time[number]+=delay[number];
-                for (int next : graph.get(number)) {
-                    time[next]=max(time[next],time[number]);
+                time[number] += delay[number];
+                for (int next : graph[number]) {
+                    time[next] = max(time[next], time[number]);
                 }
             }
 
@@ -75,7 +75,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             Integer poll = queue.poll();
             result.add(poll);
-            for (int v : graph.get(poll)) {
+            for (int v : graph[poll]) {
                 if (--inDegree[v] == 0) {
                     queue.add(v);
                 }
