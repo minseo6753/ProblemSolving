@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    private static final int INF = 400000;
     static List<Integer> list;
 
     public static void main(String[] args) throws IOException {
@@ -23,33 +24,27 @@ public class Main {
             list.add(n);
         }
 
-        dp = new int[5][5][list.size()];
+        int[][][] dp = new int[list.size() + 1][5][5];
 
-        int left = 0;
-        int right = 0;
-
-        System.out.println(recur(left, right, 0));
-    }
-
-    public static int[][][] dp;
-
-    public static int recur(int left, int right, int i) {
-        if (dp[left][right][i] != 0) {
-            return dp[left][right][i];
+        for (int i = list.size() - 1; i >= 0; i--) {
+            Integer target = list.get(i);
+            for (int left = 0; left < 5; left++) {
+                for (int right = 0; right < 5; right++) {
+                    if (i != 0 && left == right) {
+                        dp[i][left][right] = INF;
+                    }
+                    else {
+                        dp[i][left][right] = min(
+                                calculateForce(left, target) + dp[i + 1][target][right],
+                                calculateForce(right, target) + dp[i + 1][left][target]);
+                    }
+                }
+            }
         }
 
-        Integer target = list.get(i);
-
-        int leftForce = calculateForce(left, target);
-        int rightForce = calculateForce(right, target);
-
-        if (i == list.size() - 1) {
-            return min(leftForce, rightForce);
-        }
-
-        dp[left][right][i] = min(recur(target, right, i + 1) + leftForce, recur(left, target, i + 1) + rightForce);
-        return dp[left][right][i];
+        System.out.println(dp[0][0][0]);
     }
+
 
     public static int calculateForce(int foot, int target) {
         if (foot == 0) {
