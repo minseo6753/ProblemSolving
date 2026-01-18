@@ -17,10 +17,7 @@ public class Main {
         map = new char[n][m];
 
         for (int i = 0; i < n; i++) {
-            String s = br.readLine();
-            for (int j = 0; j < m; j++) {
-                map[i][j] = s.charAt(j);
-            }
+            map[i]=br.readLine().toCharArray();
         }
 
         visited = new boolean[n][m];
