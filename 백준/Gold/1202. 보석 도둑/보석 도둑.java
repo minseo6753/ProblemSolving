@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static class Jewel {
+    static class Jewel implements Comparable<Jewel>{
         int mass;
         int value;
 
@@ -16,19 +16,10 @@ public class Main {
             this.mass = mass;
             this.value = value;
         }
-    }
 
-    static class JewelMassComparator implements Comparator<Jewel> {
         @Override
-        public int compare(Jewel o1, Jewel o2) {
-            return o1.mass - o2.mass;
-        }
-    }
-
-    static class JewelValueComparator implements Comparator<Jewel> {
-        @Override
-        public int compare(Jewel o1, Jewel o2) {
-            return o2.value - o1.value;
+        public int compareTo(Jewel o) {
+            return this.mass - o.mass;
         }
     }
 
@@ -40,7 +31,7 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        PriorityQueue<Jewel> jewels = new PriorityQueue<>(new JewelMassComparator());
+        PriorityQueue<Jewel> jewels = new PriorityQueue<>();
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             int m = Integer.parseInt(st.nextToken());
@@ -54,14 +45,14 @@ public class Main {
         }
 
         long sum = 0;
-        PriorityQueue<Jewel> portable = new PriorityQueue<>(new JewelValueComparator());
+        PriorityQueue<Integer> value = new PriorityQueue<>(Comparator.reverseOrder());
         while (!bags.isEmpty()) {
             Integer bag = bags.poll();
             while (!jewels.isEmpty() && jewels.peek().mass <= bag) {
-                portable.add(jewels.poll());
+                value.add(jewels.poll().value);
             }
-            if (!portable.isEmpty()) {
-                sum += portable.poll().value;
+            if (!value.isEmpty()) {
+                sum += value.poll();
             }
         }
         System.out.println(sum);
