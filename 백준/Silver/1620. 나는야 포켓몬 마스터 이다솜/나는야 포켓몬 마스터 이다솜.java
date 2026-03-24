@@ -1,3 +1,5 @@
+import static java.lang.Character.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +28,7 @@ public class Main {
 
         for (int i = 0; i < m; i++) {
             String question = br.readLine();
-            if (question.matches("[0-9]+")) {
+            if (isDigit(question.charAt(0))) {
                 sb.append(names[Integer.parseInt(question)]);
             }
             else {
