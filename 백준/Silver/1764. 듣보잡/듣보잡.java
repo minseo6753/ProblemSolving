@@ -1,15 +1,8 @@
-import static java.lang.Character.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class Main {
 
@@ -34,10 +27,10 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
 
-        int p1=0;
-        int p2=0;
+        int p1 = 0;
+        int p2 = 0;
         int count = 0;
-        while (p1<n && p2<m) {
+        while (p1 < n && p2 < m) {
             if (hear[p1].equals(see[p2])) {
                 sb.append(hear[p1]).append("\n");
                 count++;
@@ -45,7 +38,7 @@ public class Main {
                 p2++;
             } else if (hear[p1].compareTo(see[p2]) > 0) {
                 p2++;
-            }else {
+            } else {
                 p1++;
             }
         }
