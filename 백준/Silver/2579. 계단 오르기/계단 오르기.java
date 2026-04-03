@@ -1,5 +1,3 @@
-import static java.lang.Integer.max;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,10 +15,10 @@ public class Main {
         for (int i = 2; i < n + 2; i++) {
             stair1[i] = stair2[i] = Integer.parseInt(br.readLine());
             stair1[i] += stair2[i - 1];
-            stair2[i] += max(stair1[i - 2], stair2[i - 2]);
+            stair2[i] += Math.max(stair1[i - 2], stair2[i - 2]);
         }
 
-        System.out.println(max(stair1[n + 1], stair2[n + 1]));
+        System.out.println(Math.max(stair1[n + 1], stair2[n + 1]));
     }
 
 }
